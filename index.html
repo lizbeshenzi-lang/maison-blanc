@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maison Blanc — London</title>
+<link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400;1,6..96,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --void:#f8f7f5;--near:#f2f0ed;--stone:#e8e5e0;--concrete:#c8c4bc;
+  --slate:#4a4843;--ink:#1a1916;--dim:rgba(26,25,22,.38);--mid:rgba(26,25,22,.58);
+  --b1:rgba(26,25,22,.06);--b2:rgba(26,25,22,.1);
+  --accent:#9a8c7e;--dark:#0d0c0a;
+  --serif:'Bodoni Moda',Georgia,serif;--sans:'Didact Gothic',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--ink);font-family:var(--sans);font-weight:400;line-height:1.7;overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.75rem 5rem;background:rgba(248,247,245,.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--b1)}
+.nav-name{font-family:var(--serif);font-size:.9rem;font-style:italic;letter-spacing:.25em;color:var(--ink);text-decoration:none;text-transform:uppercase}
+.nav-r{display:flex;align-items:center;gap:3.5rem}
+.nav-r a{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color .2s}
+.nav-r a:hover{color:var(--ink)}
+.nav-book{color:var(--ink)!important;border-bottom:1px solid var(--ink);padding-bottom:.1rem}
+
+/* HERO — pure white, clinical, type-only */
+.hero{min-height:100vh;background:var(--void);display:flex;flex-direction:column;justify-content:flex-end;padding:0 5rem 6rem;position:relative;overflow:hidden}
+.hero-rule-top{position:absolute;top:0;left:0;right:0;height:4px;background:var(--ink)}
+.hero-watermark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--serif);font-size:clamp(12rem,20vw,20rem);font-weight:700;font-style:italic;color:rgba(26,25,22,.04);pointer-events:none;white-space:nowrap;letter-spacing:-.05em;line-height:1}
+.hero-location{position:absolute;top:50%;right:5rem;transform:translateY(-50%);writing-mode:vertical-rl;font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--dim)}
+.hero-meta{position:relative;z-index:1;font-size:.56rem;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);margin-bottom:5rem;display:flex;gap:5rem}
+.hero-body{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:flex-end}
+.hero-h1{font-family:var(--serif);font-size:clamp(5rem,9vw,9rem);font-weight:400;font-style:italic;line-height:.88;color:var(--ink);letter-spacing:-.04em}
+.hero-right{padding-bottom:.75rem}
+.hero-tagline{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);max-width:20rem;line-height:2.4;margin-bottom:3rem}
+.hero-cta{display:inline-flex;align-items:center;gap:2rem;font-family:var(--serif);font-size:.95rem;font-style:italic;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--b2);padding-bottom:.75rem;transition:all .2s}
+.hero-cta:hover{border-color:var(--ink);gap:3rem}
+
+/* SERVICE STRIP */
+.strip{border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);display:grid;grid-template-columns:repeat(5,1fr);background:var(--near)}
+.strip-item{padding:2rem 2.5rem;border-right:1px solid var(--b1);text-align:center;transition:background .25s;cursor:default}
+.strip-item:last-child{border-right:none}
+.strip-item:hover{background:var(--stone)}
+.strip-n{font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-bottom:.5rem}
+.strip-v{font-family:var(--serif);font-size:.9rem;font-style:italic;color:var(--ink)}
+
+/* PHILOSOPHY */
+.philo{padding:10rem 5rem;display:grid;grid-template-columns:1fr 1fr;gap:12rem;background:var(--void);align-items:start}
+.philo-idx{font-size:.54rem;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);margin-bottom:1.5rem}
+.philo h2{font-family:var(--serif);font-size:clamp(2.5rem,4vw,4.5rem);font-weight:400;font-style:italic;color:var(--ink);line-height:1.1;letter-spacing:-.02em}
+.philo-right{padding-top:3rem}
+.philo p{font-size:.78rem;color:var(--mid);line-height:2.4;margin-bottom:1.5rem;letter-spacing:.03em}
+.philo-rule{height:1px;background:var(--b1);margin:3rem 0}
+.philo-facts{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.pfact-label{font-size:.54rem;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-bottom:.4rem}
+.pfact-val{font-family:var(--serif);font-size:.95rem;font-style:italic;color:var(--accent)}
+
+/* TREATMENTS */
+.treats{background:var(--dark);padding:10rem 5rem;border-top:1px solid var(--b2)}
+.treats-head{display:grid;grid-template-columns:1fr 2fr;gap:10rem;margin-bottom:8rem;align-items:end}
+.treats-label{font-size:.54rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.28)}
+.treats-head h2{font-family:var(--serif);font-size:clamp(2rem,3.5vw,4rem);font-weight:400;font-style:italic;color:rgba(248,247,245,.9);line-height:1.1}
+.treat-list{display:flex;flex-direction:column}
+.treat{display:grid;grid-template-columns:5rem 1fr 6rem 8rem;gap:3rem;padding:3rem 0;border-top:1px solid rgba(255,255,255,.06);align-items:start}
+.treat:last-child{border-bottom:1px solid rgba(255,255,255,.06)}
+.treat-n{font-size:.56rem;letter-spacing:.22em;color:rgba(255,255,255,.22)}
+.treat-info h3{font-family:var(--serif);font-size:1.3rem;font-weight:400;font-style:italic;color:rgba(248,247,245,.9);margin-bottom:.4rem;line-height:1.2}
+.treat-info p{font-size:.68rem;color:rgba(255,255,255,.35);line-height:2;max-width:32rem;letter-spacing:.04em}
+.treat-dur{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.28);padding-top:.3rem}
+.treat-price{font-family:var(--serif);font-size:1rem;font-style:italic;color:var(--accent);text-align:right;padding-top:.3rem}
+
+/* SPLIT IMAGE */
+.split{display:grid;grid-template-columns:1fr 1fr;height:60vh;min-height:480px}
+.split-panel{position:relative;overflow:hidden}
+.split-panel img{width:100%;height:100%;object-fit:cover;filter:grayscale(30%) brightness(.75);transition:filter .5s}
+.split-panel:hover img{filter:grayscale(0%) brightness(.85)}
+.split-label{position:absolute;bottom:2rem;left:2.5rem;font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(248,247,245,.55)}
+.split-div{width:1px;background:rgba(26,25,22,.15)}
+
+/* ABOUT + TEAM */
+.about{padding:10rem 5rem;background:var(--near);display:grid;grid-template-columns:1fr 1fr;gap:10rem;align-items:start;border-top:1px solid var(--b1)}
+.about-idx{font-size:.54rem;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);margin-bottom:1.5rem}
+.about h2{font-family:var(--serif);font-size:clamp(2rem,3vw,3.5rem);font-weight:400;font-style:italic;color:var(--ink);line-height:1.1}
+.about-right{padding-top:2rem}
+.about p{font-size:.75rem;color:var(--mid);line-height:2.4;margin-bottom:1.5rem;letter-spacing:.03em}
+.about-rule{height:1px;background:var(--b1);margin:2.5rem 0}
+.practitioners{display:flex;flex-direction:column;gap:0}
+.prac{padding:1.75rem 0;border-top:1px solid var(--b1);display:grid;grid-template-columns:3rem 1fr;gap:1.25rem;align-items:start}
+.prac:last-child{border-bottom:1px solid var(--b1)}
+.prac-init{font-family:var(--serif);font-size:1rem;font-style:italic;color:var(--accent)}
+.prac-name{font-size:.75rem;color:var(--ink);letter-spacing:.04em;margin-bottom:.15rem}
+.prac-role{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+
+/* BOOK */
+.bk{padding:10rem 5rem;background:var(--void);border-top:1px solid var(--b1);display:grid;grid-template-columns:1fr 1fr;gap:12rem;align-items:start}
+.bk-l h2{font-family:var(--serif);font-size:clamp(2rem,3vw,3.5rem);font-weight:400;font-style:italic;color:var(--ink);line-height:1.1;margin-bottom:2rem}
+.bk-l p{font-size:.72rem;color:var(--mid);line-height:2.4;margin-bottom:1.5rem;letter-spacing:.03em}
+.bk-note{padding:2rem;border:1px solid var(--b1);font-size:.65rem;color:var(--dim);line-height:2.2;margin-top:2rem;letter-spacing:.04em}
+.bk-note strong{color:var(--accent);font-weight:400}
+.bkform{display:flex;flex-direction:column}
+.bf{display:flex;flex-direction:column;gap:.5rem;margin-bottom:2rem}
+.bf label{font-size:.54rem;letter-spacing:.24em;text-transform:uppercase;color:var(--dim)}
+.bf input,.bf select,.bf textarea{background:transparent;border:none;border-bottom:1px solid var(--b2);padding:.85rem 0;font-size:.78rem;font-family:var(--sans);color:var(--ink);outline:none;transition:border-color .2s;border-radius:0;appearance:none;letter-spacing:.04em}
+.bf input:focus,.bf select:focus,.bf textarea:focus{border-color:var(--ink)}
+.bf input::placeholder{color:var(--dim)}
+.bf select option{background:var(--void)}
+.bf textarea{resize:none;min-height:60px;line-height:1.8}
+.bf-row{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.bksubmit{background:var(--ink);color:var(--void);padding:1.25rem 2rem;font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;cursor:pointer;font-family:var(--sans);transition:background .25s;border:none;display:flex;align-items:center;justify-content:space-between;margin-top:.5rem}
+.bksubmit:hover{background:var(--slate)}
+.bksubmit span{opacity:.45;font-size:1.1rem}
+
+/* FOOTER */
+footer{background:var(--ink);padding:5rem 5rem 3rem;border-top:4px solid var(--ink)}
+.fi{display:grid;grid-template-columns:2fr 1fr 1fr;gap:6rem;margin-bottom:4rem;padding-bottom:4rem;border-bottom:1px solid rgba(248,247,245,.06)}
+.fn{font-family:var(--serif);font-size:.95rem;font-style:italic;letter-spacing:.2em;text-transform:uppercase;color:rgba(248,247,245,.85);margin-bottom:.75rem}
+.fb{font-size:.62rem;color:rgba(248,247,245,.3);line-height:2.4;max-width:20rem;letter-spacing:.04em}
+.fc h4{font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(154,140,126,.5);margin-bottom:1.5rem}
+.fc a{display:block;font-size:.65rem;color:rgba(248,247,245,.3);text-decoration:none;margin-bottom:.7rem;transition:color .2s;letter-spacing:.06em}
+.fc a:hover{color:var(--accent)}
+.fbot{display:flex;justify-content:space-between;align-items:center;font-size:.54rem;letter-spacing:.15em}
+.fleg{color:rgba(248,247,245,.15);text-transform:uppercase}
+.fsince{font-family:var(--serif);font-style:italic;color:rgba(154,140,126,.4);font-size:.72rem}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-name">Maison Blanc</a>
+  <div class="nav-r">
+    <a href="#philo">About</a>
+    <a href="#treats">Treatments</a>
+    <a href="#bk">Reservations</a>
+    <a href="#bk" class="nav-book">Book</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-rule-top"></div>
+  <div class="hero-watermark">Blanc</div>
+  <div class="hero-location">Marylebone · London W1</div>
+  <div class="hero-meta">
+    <span>Day Spa & Skin Clinic</span>
+    <span>Est. 2018</span>
+    <span>By appointment only</span>
+  </div>
+  <div class="hero-body">
+    <h1 class="hero-h1">Pre-<br>cision<br>Care</h1>
+    <div class="hero-right">
+      <p class="hero-tagline">A London day spa and skin clinic. Science-led protocols. Medically-trained practitioners. Results, not rituals.</p>
+      <a href="#bk" class="hero-cta">Reserve a treatment</a>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="strip-item"><div class="strip-n">Format</div><div class="strip-v">By appointment</div></div>
+  <div class="strip-item"><div class="strip-n">Practitioners</div><div class="strip-v">Medically trained</div></div>
+  <div class="strip-item"><div class="strip-n">Protocol</div><div class="strip-v">Science-led</div></div>
+  <div class="strip-item"><div class="strip-n">Location</div><div class="strip-v">Marylebone W1</div></div>
+  <div class="strip-item"><div class="strip-n">Hours</div><div class="strip-v">Mon – Sat</div></div>
+</div>
+
+<section class="philo" id="philo">
+  <div>
+    <div class="philo-idx">/ 001 — The approach</div>
+    <h2>Skin is not a canvas. It is an organ.</h2>
+  </div>
+  <div class="philo-right">
+    <p>Maison Blanc was founded on a frustration with the beauty industry's habit of selling feeling over function. We opened in 2018 with a different proposition: evidence-based skin care, delivered by practitioners who understand physiology, not just aesthetics.</p>
+    <p>Every treatment at Maison Blanc begins with an assessment. Every protocol is built around your specific skin — its type, its history, its goals. We do not offer packages because no two clients need the same thing. We offer consultations, then we build a plan.</p>
+    <div class="philo-rule"></div>
+    <div class="philo-facts">
+      <div><div class="pfact-label">Medical director</div><div class="pfact-val">Dr. Helena Voss</div></div>
+      <div><div class="pfact-label">Founded</div><div class="pfact-val">2018, Marylebone</div></div>
+      <div><div class="pfact-label">Team</div><div class="pfact-val">6 practitioners</div></div>
+      <div><div class="pfact-label">Approach</div><div class="pfact-val">Consultation-first</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="treats" id="treats">
+  <div class="treats-head">
+    <div class="treats-label">/ 002 — Treatments</div>
+    <h2>What we offer, and why each one works</h2>
+  </div>
+  <div class="treat-list">
+    <div class="treat">
+      <div class="treat-n">001</div>
+      <div class="treat-info">
+        <h3>Clinical Facial</h3>
+        <p>Skin analysis, medical-grade cleanse, enzyme exfoliation, extractions where clinically indicated, and a prescribed treatment mask. The foundation of all skin programmes at Maison Blanc.</p>
+      </div>
+      <div class="treat-dur">60 min</div>
+      <div class="treat-price">£185</div>
+    </div>
+    <div class="treat">
+      <div class="treat-n">002</div>
+      <div class="treat-info">
+        <h3>Hydrafacial MD</h3>
+        <p>Vortex-fusion delivery of serums, exfoliants, and antioxidants simultaneously. Immediate results. Suitable before events. No downtime.</p>
+      </div>
+      <div class="treat-dur">45 min</div>
+      <div class="treat-price">£225</div>
+    </div>
+    <div class="treat">
+      <div class="treat-n">003</div>
+      <div class="treat-info">
+        <h3>Chemical Peel (Prescribed)</h3>
+        <p>Glycolic, lactic, or TCA peel at clinical concentrations. Prescribed after consultation. Significant improvement in pigmentation, texture, and acne scarring over a course of treatments.</p>
+      </div>
+      <div class="treat-dur">30 – 45 min</div>
+      <div class="treat-price">£165</div>
+    </div>
+    <div class="treat">
+      <div class="treat-n">004</div>
+      <div class="treat-info">
+        <h3>Microneedling (RF)</h3>
+        <p>Radiofrequency microneedling for collagen induction, skin tightening, and scar remodelling. Performed by medically trained practitioners only.</p>
+      </div>
+      <div class="treat-dur">75 min</div>
+      <div class="treat-price">£395</div>
+    </div>
+    <div class="treat">
+      <div class="treat-n">005</div>
+      <div class="treat-info">
+        <h3>Skin Programme</h3>
+        <p>Six-treatment programme designed by Dr. Voss around your skin goals. Combines modalities across the course with adjustments based on skin response.</p>
+      </div>
+      <div class="treat-dur">Ongoing</div>
+      <div class="treat-price">From £980</div>
+    </div>
+    <div class="treat">
+      <div class="treat-n">006</div>
+      <div class="treat-info">
+        <h3>Skin Consultation</h3>
+        <p>60-minute consultation with a senior practitioner. Full skin analysis, history review, and a written treatment plan. Required before any prescribed treatment. Redeemable against your first treatment.</p>
+      </div>
+      <div class="treat-dur">60 min</div>
+      <div class="treat-price">£95</div>
+    </div>
+  </div>
+</section>
+
+<div class="split">
+  <div class="split-panel">
+    <img src="https://images.pexels.com/photos/3997983/pexels-photo-3997983.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Treatment room">
+    <div class="split-label">Treatment Room 1</div>
+  </div>
+  <div class="split-div"></div>
+  <div class="split-panel">
+    <img src="https://images.pexels.com/photos/4041392/pexels-photo-4041392.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Skin clinic">
+    <div class="split-label">Consultation Suite</div>
+  </div>
+</div>
+
+<section class="about" id="about">
+  <div>
+    <div class="about-idx">/ 003 — The team</div>
+    <h2>Practitioners, not therapists</h2>
+  </div>
+  <div class="about-right">
+    <p>Everyone at Maison Blanc holds a clinical qualification. We recruit from nursing, dermatology, and aesthetics medicine. We do not recruit from beauty schools. The distinction matters: our team understands the biology of the treatments they deliver, not just the protocol.</p>
+    <p>All new treatments are supervised by Dr. Helena Voss, our medical director, until full clinical sign-off is given. That is non-negotiable.</p>
+    <div class="about-rule"></div>
+    <div class="practitioners">
+      <div class="prac"><div class="prac-init">H.</div><div><div class="prac-name">Dr. Helena Voss</div><div class="prac-role">Medical Director · Aesthetics Medicine, MBBS</div></div></div>
+      <div class="prac"><div class="prac-init">S.</div><div><div class="prac-name">Sarah Beaumont</div><div class="prac-role">Senior Practitioner · RN, Level 7 Aesthetics</div></div></div>
+      <div class="prac"><div class="prac-init">M.</div><div><div class="prac-name">Maya Osei</div><div class="prac-role">Skin Specialist · BSc Dermatology</div></div></div>
+      <div class="prac"><div class="prac-init">J.</div><div><div class="prac-name">James Whitfield</div><div class="prac-role">Clinical Aesthetician · Level 5, Meso & Micro</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="bk" id="bk">
+  <div class="bk-l">
+    <h2>Book a consultation or treatment</h2>
+    <p>New clients begin with a consultation. It takes sixty minutes and costs £95, redeemable against your first treatment. This is not optional — we need to assess your skin before prescribing any clinical treatment.</p>
+    <p>Returning clients may book treatments directly. If your skin has changed significantly since your last visit, we may ask to reassess before proceeding.</p>
+    <div class="bk-note">
+      <strong>Cancellation policy</strong><br>
+      We require 48 hours' notice for cancellations or rescheduling. Late cancellations are charged at 50% of the treatment fee. No-shows are charged in full. This allows us to offer cancelled slots to clients on our waiting list.
+    </div>
+  </div>
+  <div class="bkform">
+    <div class="bf"><label>Full name</label><input type="text" id="fName" id="fEmail" placeholder="—"></div>
+    <div class="bf"><label>Email</label><input type="email" placeholder="—"></div>
+    <div class="bf"><label>Phone</label><input type="tel" placeholder="—"></div>
+    <div class="bf-row">
+      <div class="bf"><label>New or returning client?</label>
+        <select>
+          <option>—</option>
+          <option>New client (consultation first)</option>
+          <option>Returning client</option>
+        </select>
+      </div>
+      <div class="bf"><label>Preferred day</label>
+        <select>
+          <option>—</option>
+          <option>Monday</option><option>Tuesday</option><option>Wednesday</option>
+          <option>Thursday</option><option>Friday</option><option>Saturday</option>
+        </select>
+      </div>
+    </div>
+    <div class="bf"><label>Treatment of interest</label>
+      <select>
+        <option>—</option>
+        <option>Skin consultation (£95 — recommended first)</option>
+        <option>Clinical Facial (£185)</option>
+        <option>Hydrafacial MD (£225)</option>
+        <option>Chemical Peel (£165)</option>
+        <option>RF Microneedling (£395)</option>
+        <option>Skin Programme (from £980)</option>
+      </select>
+    </div>
+    <div class="bf"><label>Any skin concerns or medical history we should know</label><textarea placeholder="—"></textarea></div>
+    <button class="bksubmit" id="fBtn" onclick="submitEnq()">Submit booking request <span>→</span></button>
+  </div>
+</section>
+
+<footer>
+  <div class="fi">
+    <div>
+      <div class="fn">Maison Blanc</div>
+      <p class="fb">A clinical day spa and skin clinic in Marylebone, London. Science-led treatments, medically trained practitioners, and a strict consultation-first approach. No packages. No upselling. Just results.</p>
+    </div>
+    <div class="fc">
+      <h4>Treatments</h4>
+      <a href="#">Clinical Facial</a>
+      <a href="#">Hydrafacial MD</a>
+      <a href="#">Chemical Peel</a>
+      <a href="#">RF Microneedling</a>
+      <a href="#">Skin Programme</a>
+    </div>
+    <div class="fc">
+      <h4>Contact</h4>
+      <a href="#">12 Harley Street, W1G 9PF</a>
+      <a href="#">hello@maisonblanc.co.uk</a>
+      <a href="#">+44 (0)20 7123 4567</a>
+      <a href="#">Mon – Sat, 09:00 – 18:00</a>
+    </div>
+  </div>
+  <div class="fbot">
+    <span class="fleg">© 2025 Maison Blanc Ltd · London W1 · Registered in England · CQC registered</span>
+    <span class="fsince">Est. 2018</span>
+  </div>
+</footer>
+
+<script>
+async function submitEnq(){
+  var n=document.getElementById('fName')?.value.trim()||'',e=document.getElementById('fEmail')?.value.trim()||'',p=document.getElementById('fPhone')?.value.trim()||'';
+  if(!n){showSt('Please enter your name.','#8b0000','#fff0ee');return;}
+  var btn=document.getElementById('fBtn');btn.disabled=true;
+  try{var res=await fetch('/api/enquire',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({name:n,email:e,phone:p,siteName:'Maison Blanc',whatsappNumber:''})
+  });
+  var d=res.ok?await res.json():{success:true,whatsappUrl:'https://wa.me/'};
+  showSt('Thank you. We\'ll be in touch shortly to confirm.','#1a3a1a','#f0f8f0');
+  btn.textContent='Sent ✓';}
+  catch{btn.disabled=false;showSt('Something went wrong. Please contact us directly.','#8b0000','#fff0ee');}
+}
+function showSt(m,c,bg){var e=document.getElementById('fStatus');e.textContent=m;e.style.cssText='display:block;background:'+bg+';color:'+c+';border:1px solid '+c+';padding:.85rem 1rem;font-size:.82rem;margin-top:.75rem';}
+</script>
+</body>
+</html>
